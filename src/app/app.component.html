@@ -1,40 +1,40 @@
 <div class="container">
-  <div class="jumbotron">
+  <div>
     <h1>Fila Espera</h1>
-    <h2></h2>
   </div>
   <div class="panel panel-primary">
     <div class="panel-heading">Fila</div>
     <div class="panel-body">
-      <h3>{{title}}</h3>
       <div class="col-md-12">
-        <div class="col-lg-6">
-          <input class="form-control" id="info" placeholder="Digite Seu Nome" #info/>
+        <div class="col-lg-6" id="inputNome">
+          <input  class="form-control" id="info" placeholder="Digite Seu Nome" #info/>
         </div>
-        <div>
-          <button class="btn btn-success" (click)="addLista(info.value)">Adicionar</button>
+        <div id="btnfala">
+          <button  class="btn btn-success" (click)="addLista(info.value)">Adicionar</button>
         </div>
       </div>
       <div class="col-md-12">
-        <table class="table table-striped">
-          <thead>
-            <tr>
-              <th scope="col">#</th>
-              <th scope="col">Nome</th>
-              <th scope="col">Ação</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let pessoas of listaTabela">
-              <th scope="row"></th>
-              <td>{{pessoas.nome}}</td>
-              <td>
-                <button class="btn btn-info" (click)="falar(pessoas.nome)">Chamar</button>
-                <button class="btn btn-danger"  (click)="removerItem(pessoas)">Remover</button>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+        <div class="table-responsive">
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Nome</th>
+                <th scope="col">Ação</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let pessoas of listaTabela">
+                <th scope="row"></th>
+                <td>{{pessoas.nome}}</td>
+                <td>
+                  <button class="btn btn-info" (click)="falar(pessoas.nome)">Chamar</button>
+                  <button class="btn btn-danger"  (click)="removerItem(pessoas)">Remover</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
   </div>

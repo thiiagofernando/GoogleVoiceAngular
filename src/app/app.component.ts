@@ -14,15 +14,18 @@ export class AppComponent {
   listaTabela: ListaModel[] = [];
 
   addLista(texto: string){
+    if(texto.length >= 1){
       let p ={
         id: Guid.create(),
         nome: texto
       }
-      console.log(this.listaTabela.length);
-      if(this.listaTabela.length < 4)
+      if(this.listaTabela.length <= 5)
           this.listaTabela.push(p);
       else
-        alert("Permitido somente 4 registros");
+        alert("Permitido somente 6 registros");
+    }else{
+      alert("Informe um nome");
+    }
   }
   removerItem(index) {
     this.listaTabela.splice(index, 1);
@@ -31,7 +34,7 @@ export class AppComponent {
     if (texto) {
       const speech = new Speech();
       speech.init({
-        'volume': 6,
+        'volume': 1,
         'lang': 'pt-BR',
         'rate': 1,
         'pitch': 1,

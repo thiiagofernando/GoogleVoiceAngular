@@ -1,6 +1,5 @@
-import { Guid } from "guid-typescript";
 
 export class ListaModel {
-    public id:Guid;
+    public id:number;
     public nome:string;
 }

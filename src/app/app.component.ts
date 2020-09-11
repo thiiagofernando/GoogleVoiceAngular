@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import Speech from 'speak-tts';
+import { FormBuilder,  FormGroup } from '@angular/forms';
 import { ListaModel } from './lista-model.model';
 import { Guid } from "guid-typescript";
 
@@ -9,26 +10,48 @@ import { Guid } from "guid-typescript";
   styleUrls: ['./app.component.css']
 })
 
-export class AppComponent {
-  title = 'Atedimento';
+export class AppComponent  implements OnInit{
+
   listaTabela: ListaModel[] = [];
+  formCliente: FormGroup;
+
+  constructor(private formBuilder: FormBuilder) { }
+  
+  ngOnInit() {
+    this.createForm(new ListaModel());
+  }
+  createForm(cliente: ListaModel) {
+    this.formCliente = this.formBuilder.group({
+      nome: [cliente.nome],
+    })
+  }
 
   addLista(texto: string){
-    if(texto.length >= 1){
-      let p ={
-        id: Guid.create(),
-        nome: texto
+
+    let exist = this.listaTabela.filter(x => x.nome.toLocaleUpperCase() == texto.toLocaleUpperCase());
+    if(exist.length <= 0){
+      if(texto.length >= 1){
+        let p ={
+          id:  this.listaTabela.length + 1,
+          nome: texto
+        }
+        if(this.listaTabela.length <= 5)
+            this.listaTabela.push(p);
+        else
+          alert("Permitido somente 6 registros");
+      }else{
+        alert("Informe um nome");
       }
-      if(this.listaTabela.length <= 5)
-          this.listaTabela.push(p);
-      else
-        alert("Permitido somente 6 registros");
     }else{
-      alert("Informe um nome");
+      alert("Nome já informado");
     }
+    this.formCliente.setValue({
+      nome : ''
+    });
   }
   removerItem(index) {
-    this.listaTabela.splice(index, 1);
+    let obj = this.listaTabela.indexOf(index);
+    this.listaTabela.splice(obj, 1);
   }
   falar(texto: string) {
     if (texto) {
